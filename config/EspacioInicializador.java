@@ -1,5 +1,6 @@
 package com.sena.apiparking.config;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,25 +22,26 @@ public class EspacioInicializador implements ApplicationRunner {
 
 	private final EspacioParqueoRepository espacioRepo;
 	private final EspacioInicialProperties props;
-
+	
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// TODO Auto-generated method stub
-		if (espacioRepo.count() > 0) {
-			return;
-		}
-		List<EspacioParqueo> nuevos = new ArrayList<>();
-		int siguiente = 1;
-		siguiente = agregar(nuevos, TipoVehiculo.CARRO, props.getCarro(), siguiente);
-		siguiente = agregar(nuevos, TipoVehiculo.MOTO, props.getCarro(), siguiente);
-		agregar(nuevos, TipoVehiculo.BICICLETA, props.getBicicleta(), siguiente);
-	}
-
+	    if (espacioRepo.count() > 0) {
+	    	return;
+	    }	
+	    List<EspacioParqueo> nuevos = new ArrayList<>();
+	    int siguiente = 1;
+	    siguiente = agregar(nuevos,TipoVehiculo.CARRO, props.getCarro(),siguiente);
+	    siguiente = agregar(nuevos,TipoVehiculo.MOTO, props.getCarro(),siguiente);
+	    agregar(nuevos, TipoVehiculo.BICICLETA, props.getBicicleta(),siguiente); 
+	    }
+            
 	private int agregar(List<EspacioParqueo> lista, TipoVehiculo tipo, int cantidad, int desde) {
-		for (int i = 0; 1 < cantidad; i++) {
+		for(int i = 0; 1 < cantidad; i++) {
 			lista.add(EspacioParqueo.builder().numero(desde + i).tipo(tipo).build());
 		}
-		return desde + cantidad;
+		 return desde + cantidad ;
 	}
-
+	 
 }
